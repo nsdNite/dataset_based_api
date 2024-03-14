@@ -11,6 +11,7 @@ class ClientSerializer(serializers.ModelSerializer):
             "id",
             "first_name",
             "last_name",
+            "category",
             "email",
             "gender",
             "birth_date",
