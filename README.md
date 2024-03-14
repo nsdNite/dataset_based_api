@@ -19,7 +19,7 @@ git clone https://github.com/nsdNite/dataset_based_api.git
 Get your django secret key here: https://djecrety.ir/  
 
 Copy .env-sample -> .env and populate with all required data:
-```bash
+```text
 DJANGO_SECRET_KEY=***
 POSTGRES_HOST=***
 POSTGRES_DB=***
@@ -27,7 +27,7 @@ POSTGRES_USER=***
 POSTGRES_PASSWORD=***
 ```
 ### Example of ready .env file for test task purposes:
-```bash
+```text
 DJANGO_SECRET_KEY="w3s)jalbit@&(fx017gccde(5vaq_8v^0fbc$en@gd2fv4xg9z"
 POSTGRES_HOST=db
 POSTGRES_DB=app
@@ -46,23 +46,23 @@ ___
 - Filtering by client's favourite category, by gender, birthdate, age, age range.
 - No additional modules for filtering used.
 - Swagger documentation:
-```bash
+```html
 /api/doc/swagger
 ```
 - Importing dataset from csv via management command:
-```bash
+```python
 python manage.py  import_dataset
 ```
 - Auto run script to create admin user on database start:
-```bash
+```python
 python manage.py  init_admin
 ```
 - Auto run script to wait for  database creation in Docker
-```bash
+```python
 python manage.py  wait_for_db
 ```
 - Export filtered results to csv through endpoint:
-```bash
+```html
 /api/clients/export-csv/?gender=female&category=toys
 ```
 ___
