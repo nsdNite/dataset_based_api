@@ -2,6 +2,7 @@ import csv
 from datetime import datetime
 
 from django.core.management.base import BaseCommand
+from tqdm import tqdm
 
 from API.models import Client
 
@@ -16,7 +17,7 @@ class Command(BaseCommand):
         with open(options["filename"]) as csv_file:
             csv_reader = csv.DictReader(csv_file)
 
-            for row in csv_reader:
+            for row in tqdm(csv_reader, desc="Loading database:"):
                 gender_mapping = {
                     "male": Client.Gender.MALE,
                     "female": Client.Gender.FEMALE,
