@@ -4,12 +4,13 @@ from django.db import models
 class Client(models.Model):
 
     class Gender(models.TextChoices):
-        MALE = "M", "male"
-        FEMALE = "F", "female"
-        OTHER = "O", "other"
+        MALE = "male", "male"
+        FEMALE = "female", "female"
+        OTHER = "other", "other"
 
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
+    category = models.CharField(max_length=200)
     email = models.EmailField(unique=True)
     gender = models.CharField(max_length=2, choices=Gender.choices)
     birth_date = models.DateField()
