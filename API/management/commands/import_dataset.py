@@ -36,6 +36,8 @@ class Command(BaseCommand):
                     defaults={
                         "first_name": row["firstname"],
                         "last_name": row["lastname"],
+                        "category": row["category"],
+                        "email": row["email"],
                         "gender": gender,
                         "birth_date": birth_date,
                     },
