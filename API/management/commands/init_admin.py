@@ -12,8 +12,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if User.objects.count() == 0:
-            username = os.getenv("ADMIN_USRENAME")
-            password = os.getenv("ADMIN_PASSWORD")
+            username = "admin"
+            password = "admin"
             print("Creating superuser")
             User.objects.create_superuser(username=username, password=password)
         else:
