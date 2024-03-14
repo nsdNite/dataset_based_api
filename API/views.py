@@ -1,6 +1,9 @@
+import csv
 from datetime import date, timedelta
 
+from django.http import HttpResponse
 from rest_framework import viewsets, status
+from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from API.models import Client
@@ -20,7 +23,7 @@ class ClientViewSet(viewsets.ModelViewSet):
         age = self.request.query_params.get("age", None)
         age_min = self.request.query_params.get("age_min", None)
         age_max = self.request.query_params.get("age_max", None)
-        queryset = self.queryset
+        queryset = super().get_queryset()
 
         if category:
             queryset = queryset.filter(category=category)
@@ -63,3 +66,38 @@ class ClientViewSet(viewsets.ModelViewSet):
                 )
 
         return queryset
+
+    @action(detail=False, methods=["get"], url_path="export-csv")
+    def export_csv(self, request, *args, **kwargs):
+        """Getting filtered results as csv output. E.g.
+        /api/clients/export-csv/?gender=female&category=toys
+        returns list of female clients with toys as favourite category."""
+        queryset = self.filter_queryset(self.get_queryset())
+        response = HttpResponse(content_type="text/csv")
+        response["Content-Disposition"] = 'attachment; filename="clients.csv"'
+
+        writer = csv.writer(response)
+        writer.writerow(
+            [
+                "category",
+                "firstname",
+                "lastname",
+                "email",
+                "gender",
+                "birthDate",
+            ]
+        )
+
+        for client in queryset:
+            writer.writerow(
+                [
+                    client.category,
+                    client.first_name,
+                    client.last_name,
+                    client.email,
+                    client.gender,
+                    client.birth_date,
+                ]
+            )
+
+        return response
