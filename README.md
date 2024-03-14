@@ -1,15 +1,68 @@
-# Dataset based API
-
+# Dataset based API 📊
 Simple API based on provided dataset.
+___
+## Technologies ⚙️⚙️⚙️
+Python 3.10, Django, Django REST Framework, Docker
+___
+## Prerequisites
+Python 3.10 + 🐍 should be installed.  
+Docker 🐳 should be installed.
+___
+## How to run 🏃🏻
 
-## Technologies: Pyhton 3, Django, Django REST Framework, Docker
+Clone repo to the desired directory:
 
-## Features
--
--
--
+```bash
+git clone https://github.com/nsdNite/dataset_based_api.git
+```
 
-## How to run:
+Get your django secret key here: https://djecrety.ir/  
 
-Docket should be installed first.
-
+Copy .env-sample -> .env and populate with all required data:
+```bash
+DJANGO_SECRET_KEY=***
+POSTGRES_HOST=***
+POSTGRES_DB=***
+POSTGRES_USER=***
+POSTGRES_PASSWORD=***
+```
+### Example of ready .env file for test task purposes:
+```bash
+DJANGO_SECRET_KEY="w3s)jalbit@&(fx017gccde(5vaq_8v^0fbc$en@gd2fv4xg9z"
+POSTGRES_HOST=db
+POSTGRES_DB=app
+POSTGRES_USER=postgres_user
+POSTGRES_PASSWORD=1234
+```
+After setup, run:
+```bash
+docker-compose up --build
+````
+Note: superuser is created automatically with .env info if no users exist in database.  
+Note: data imports automatically from dataset.csv provided, it may take some time.  
+Note: no credentials needed to access this API.
+___
+## Features ✨
+- Filtering by client's favourite category, by gender, birthdate, age, age range.
+- No additional modules for filtering used.
+- Swagger documentation:
+```bash
+/api/doc/swagger
+```
+- Importing dataset from csv via management command:
+```bash
+python manage.py  import_dataset
+```
+- Auto run script to create admin user on database start:
+```bash
+python manage.py  init_admin
+```
+- Auto run script to wait for  database creation in Docker
+```bash
+python manage.py  wait_for_db
+```
+- Export filtered results to csv through endpoint:
+```bash
+/api/clients/export-csv/?gender=female&category=toys
+```
+___
