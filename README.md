@@ -38,6 +38,15 @@ After setup, run:
 ```bash
 docker-compose up --build
 ````
+API will be available via:
+```html
+http://localhost:8000/api/clients
+```
+Swagger for API will be available via:
+```html
+http://localhost:8000/api/doc/swagger
+```
+
 Note: superuser is created automatically with .env info if no users exist in database.  
 Note: data imports automatically from dataset.csv provided, it may take some time.  
 Note: no credentials needed to access this API.
